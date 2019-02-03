@@ -5,8 +5,20 @@ import {
   SELECT_USER
 } from "../actions/actionTypes";
 
+// Static data for simulating user's own profile
+const myProfile = {
+  id: 999,
+  initials: "AH",
+  name: "Andy Ho",
+  username: "Andyhsh",
+  email: "89andy@gmail.com",
+  address: "Apartment Street City Zip",
+  phone: "1234-5678"
+};
+
 const initialState = {
   users: [],
+  myProfile,
   selectedUser: null,
   error: null,
   loading: false

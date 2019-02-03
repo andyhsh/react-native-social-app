@@ -1,26 +1,39 @@
 import React, { Component } from "react";
 import { View } from "react-native";
-import { UserDetails } from '../components/UserDetails';
+import { connect } from "react-redux";
+import { UserDetails } from "../components/UserDetails";
+
 class UserProfileScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      title: "Profile"
+      title: navigation.getParam("title", "My Profile")
     };
   };
 
   render() {
+    const { user, navigation, myProfile } = this.props;
+    const isMyProfile = navigation.getParam("myProfile", true);
+    const userDetails = isMyProfile ? myProfile : user;
+
     return (
       <View>
         <UserDetails
-          initials="LG"
-          name="Leanne Graham"
-          email="Sincere@april.biz"
-          address="Apt. 556 Kulas Light Gwenborough"
-          phone="6042182731"
+          initials={userDetails.initials}
+          name={userDetails.name}
+          email={userDetails.email}
+          address={userDetails.address}
+          phone={userDetails.phone}
         />
       </View>
     );
   }
 }
 
-export { UserProfileScreen };
+const mapStateToProps = state => {
+  return {
+    user: state.users.selectedUser,
+    myProfile: state.users.myProfile
+  };
+};
+
+export default connect(mapStateToProps)(UserProfileScreen);

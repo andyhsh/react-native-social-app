@@ -15,7 +15,10 @@ class UserListScreen extends Component {
   }
 
   onPressUserRow = ({ user }) => {
-    this.props.navigation.navigate("UserProfile", { title: user.name });
+    this.props.navigation.navigate("UserProfile", {
+      title: user.name,
+      myProfile: false
+    });
     this.props.onSelectUser(user);
   };
 
