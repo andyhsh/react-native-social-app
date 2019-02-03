@@ -14,9 +14,9 @@ class UserListScreen extends Component {
     this.props.onFetchUserList();
   }
 
-  onPressUserRow = ({ id, name }) => {
-    this.props.navigation.navigate("UserProfile", { title: name });
-    this.props.onSelectUser(id);
+  onPressUserRow = ({ user }) => {
+    this.props.navigation.navigate("UserProfile", { title: user.name });
+    this.props.onSelectUser(user);
   };
 
   renderSeparator = () => <View style={styles.separator} />;
@@ -29,11 +29,7 @@ class UserListScreen extends Component {
         <FlatList
           data={users}
           renderItem={({ item }) => (
-            <UserListItem
-              id={item.id}
-              name={item.name}
-              onPress={this.onPressUserRow}
-            />
+            <UserListItem user={item} onPress={this.onPressUserRow} />
           )}
           keyExtractor={item => `${item.id}`}
           ItemSeparatorComponent={this.renderSeparator}
@@ -63,7 +59,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onFetchUserList: () => dispatch(fetchUserList()),
-    onSelectUser: userId => dispatch(selectUser(userId))
+    onSelectUser: user => dispatch(selectUser(user))
   };
 };
 

@@ -36,7 +36,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         selectedUser: state.users.find(user => {
-          return user.id === action.userId;
+          return user.id === action.user.id;
         })
       };
     default:

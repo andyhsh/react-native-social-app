@@ -15,7 +15,7 @@ export const fetchUserList = () => {
 
       dispatch({
         type: FETCH_USERS_SUCCESS,
-        users
+        users: users.map(buildUserInfo)
       });
     } catch {
       dispatch({
@@ -26,9 +26,23 @@ export const fetchUserList = () => {
   };
 };
 
-export const selectUser = userId => {
+export const selectUser = user => {
   return {
     type: SELECT_USER,
-    userId
+    user: buildUserInfo(user)
   };
 };
+
+function buildUserInfo(user) {
+  const { suite, street, city, zipcode } = user.address;
+  const initials = user.name
+    .split(" ")
+    .map(n => n[0].toUpperCase())
+    .join("");
+
+  return {
+    ...user,
+    address: `${suite} ${street}, ${city} ${zipcode}`,
+    initials
+  };
+}

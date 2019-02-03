@@ -5,12 +5,15 @@ import { colors } from "../styles/theme";
 
 class UserListItem extends Component {
   render() {
-    const { id, name, onPress } = this.props;
+    const { user, onPress } = this.props;
 
     return (
-      <TouchableOpacity style={styles.container} onPress={() => onPress({id, name})}>
+      <TouchableOpacity
+        style={styles.container}
+        onPress={() => onPress({ user })}
+      >
         <View>
-          <Text>{name}</Text>
+          <Text>{user.name}</Text>
         </View>
       </TouchableOpacity>
     );
@@ -21,13 +24,12 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 40,
     paddingVertical: 30,
-    backgroundColor: colors.white,
+    backgroundColor: colors.white
   }
 });
 
 UserListItem.propTypes = {
-  id: PropTypes.number,
-  name: PropTypes.string,
+  user: PropTypes.object,
   onPress: PropTypes.func
 };
 
