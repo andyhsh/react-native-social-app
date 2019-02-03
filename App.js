@@ -5,7 +5,7 @@ import {
   createAppContainer
 } from "react-navigation";
 
-import { UserListScreen } from "./src/screens/UserListScreen";
+import UserListScreen from "./src/screens/UserListScreen";
 import { UserProfileScreen } from "./src/screens/UserProfileScreen";
 import { colors } from "./src/styles/theme";
 

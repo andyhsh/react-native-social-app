@@ -1,10 +1,15 @@
 import React, { Component } from "react";
 import { View, Text, Button } from "react-native";
-
+import { connect } from "react-redux";
+import { fetchUserList } from "../store/actions/index";
 class UserListScreen extends Component {
   static navigationOptions = {
     title: "Friends"
   };
+
+  componentDidMount() {
+    this.props.onFetchUserList();
+  }
 
   render() {
     return (
@@ -18,9 +23,25 @@ class UserListScreen extends Component {
             })
           }
         />
+        <Text>{JSON.stringify(this.props.users, null, 2)}</Text>
       </View>
     );
   }
 }
 
-export { UserListScreen };
+const mapStateToProps = state => {
+  return {
+    users: state.users.users
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onFetchUserList: () => dispatch(fetchUserList())
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UserListScreen);
