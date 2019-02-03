@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { View, Text, Button } from "react-native";
-import { getUsers } from "../services/api";
 
 class UserListScreen extends Component {
   static navigationOptions = {
