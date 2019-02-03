@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, Button } from "react-native";
+import { View, Text, FlatList } from "react-native";
 import { connect } from "react-redux";
 import { fetchUserList } from "../store/actions/index";
 class UserListScreen extends Component {
@@ -11,19 +11,24 @@ class UserListScreen extends Component {
     this.props.onFetchUserList();
   }
 
+  _keyExtractor = item => `${item.id}`;
+
+  _renderUserRow = ({ item }) => (
+    <View>
+      <Text>{item.name}</Text>
+    </View>
+  );
+
   render() {
+    const { users } = this.props;
+
     return (
       <View>
-        <Text>UserList Screen</Text>
-        <Button
-          title="Go to Details"
-          onPress={() =>
-            this.props.navigation.navigate("UserProfile", {
-              otherParam: "Param passed through user list screen"
-            })
-          }
+        <FlatList
+          data={users}
+          renderItem={this._renderUserRow}
+          keyExtractor={this._keyExtractor}
         />
-        <Text>{JSON.stringify(this.props.users, null, 2)}</Text>
       </View>
     );
   }
