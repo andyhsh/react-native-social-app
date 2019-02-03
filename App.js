@@ -7,18 +7,19 @@ import {
 
 import { UserListScreen } from "./src/screens/UserListScreen";
 import { UserProfileScreen } from "./src/screens/UserProfileScreen";
+import { colors } from "./src/styles/theme";
 
 const headerStyling = {
   headerStyle: {
-    backgroundColor: "#4ccace"
+    backgroundColor: colors.teal
   },
-  headerTintColor: "#ffffff",
+  headerTintColor: colors.white,
   headerTitleStyle: {
     fontWeight: "bold"
   }
 };
 
-const UserListStack = createStackNavigator(
+const FriendsStack = createStackNavigator(
   {
     UserList: {
       screen: UserListScreen
@@ -33,7 +34,7 @@ const UserListStack = createStackNavigator(
   }
 );
 
-const UserProfileStack = createStackNavigator(
+const ProfileStack = createStackNavigator(
   {
     UserProfile: {
       screen: UserProfileScreen
@@ -47,13 +48,13 @@ const UserProfileStack = createStackNavigator(
 
 const TabNavigator = createBottomTabNavigator(
   {
-    Friends: { screen: UserListStack },
-    Profile: { screen: UserProfileStack }
+    Friends: { screen: FriendsStack },
+    Profile: { screen: ProfileStack }
   },
   {
     tabBarOptions: {
-      activeTintColor: "#000",
-      inactiveTintColor: "#454f5b"
+      activeTintColor: colors.black,
+      inactiveTintColor: colors.gray
     }
   }
 );
