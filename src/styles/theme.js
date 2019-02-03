@@ -3,7 +3,7 @@ export const colors = {
   white: "#fff",
   black: "#000",
   gray: "#454f5b",
-  lightGray: "#c4cdd5"
+  lightGray: "#f4f6f8"
 };
 
 export const fontSize = {

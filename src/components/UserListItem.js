@@ -8,7 +8,7 @@ class UserListItem extends Component {
     const { id, name, onPress } = this.props;
 
     return (
-      <TouchableOpacity style={styles.container} onPress={() => onPress(id)}>
+      <TouchableOpacity style={styles.container} onPress={() => onPress({id, name})}>
         <View>
           <Text>{name}</Text>
         </View>

@@ -1,7 +1,8 @@
 import {
   FETCH_USERS_REQUEST,
   FETCH_USERS_SUCCESS,
-  FETCH_USERS_FAILURE
+  FETCH_USERS_FAILURE,
+  SELECT_USER
 } from "./actionTypes";
 
 import { getUsers } from "../../services/api";
@@ -22,5 +23,12 @@ export const fetchUserList = () => {
         error: "Something went wrong, please try again later."
       });
     }
+  };
+};
+
+export const selectUser = userId => {
+  return {
+    type: SELECT_USER,
+    userId
   };
 };

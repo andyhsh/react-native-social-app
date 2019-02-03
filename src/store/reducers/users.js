@@ -1,7 +1,8 @@
 import {
   FETCH_USERS_REQUEST,
   FETCH_USERS_SUCCESS,
-  FETCH_USERS_FAILURE
+  FETCH_USERS_FAILURE,
+  SELECT_USER
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -30,6 +31,13 @@ const reducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: "Something went wrong, please try again later."
+      };
+    case SELECT_USER:
+      return {
+        ...state,
+        selectedUser: state.users.find(user => {
+          return user.id === action.userId;
+        })
       };
     default:
       return state;
