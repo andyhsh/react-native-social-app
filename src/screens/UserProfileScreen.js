@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { View } from "react-native";
 import { connect } from "react-redux";
+import { fetchUserAlbums } from "../store/actions/index";
 import { UserDetails } from "../components/UserDetails";
+import UserAlbums from "../components/UserAlbums";
 
 class UserProfileScreen extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -10,19 +12,42 @@ class UserProfileScreen extends Component {
     };
   };
 
-  render() {
+  constructor(props) {
+    super(props);
+    this.userDetails = this.getUserObject();
+  }
+
+  componentDidMount() {
+    const { onFetchUserAlbums } = this.props;
+    onFetchUserAlbums(this.userDetails.id);
+  }
+
+  onPressAlbum = ({ albumId }) => {
+    console.log(albumId);
+  };
+
+  getUserObject() {
     const { user, navigation, myProfile } = this.props;
     const isMyProfile = navigation.getParam("myProfile", true);
-    const userDetails = isMyProfile ? myProfile : user;
+    return isMyProfile ? myProfile : user;
+  }
+
+  render() {
+    const { albums } = this.props;
 
     return (
       <View>
         <UserDetails
-          initials={userDetails.initials}
-          name={userDetails.name}
-          email={userDetails.email}
-          address={userDetails.address}
-          phone={userDetails.phone}
+          initials={this.userDetails.initials}
+          name={this.userDetails.name}
+          email={this.userDetails.email}
+          address={this.userDetails.address}
+          phone={this.userDetails.phone}
+        />
+        <UserAlbums
+          albums={this.userDetails.id === 999 ? [] : albums.albums}
+          onPress={this.onPressAlbum}
+          loading={albums.loading}
         />
       </View>
     );
@@ -32,8 +57,18 @@ class UserProfileScreen extends Component {
 const mapStateToProps = state => {
   return {
     user: state.users.selectedUser,
-    myProfile: state.users.myProfile
+    myProfile: state.users.myProfile,
+    albums: state.albums
   };
 };
 
-export default connect(mapStateToProps)(UserProfileScreen);
+const mapDispatchToProps = dispatch => {
+  return {
+    onFetchUserAlbums: userId => dispatch(fetchUserAlbums(userId))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UserProfileScreen);

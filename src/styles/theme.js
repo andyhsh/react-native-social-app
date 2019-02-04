@@ -12,3 +12,9 @@ export const fontSize = {
   large: 24,
   extraLarge: 32
 };
+
+export const fontWeight = {
+  light: "300",
+  normal: "500",
+  bold: "700"
+};
