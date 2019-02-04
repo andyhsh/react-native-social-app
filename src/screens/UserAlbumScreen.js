@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { View, Text, Image, StyleSheet } from "react-native";
-import PropTypes from "prop-types";
 import { colors, fontSize, fontWeight } from "../styles/theme";
+import PhotoGrid from "../components/PhotoGrid";
+import { fetchAlbumPhotos } from "../store/actions/index";
 
 class UserAlbumScreen extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -10,13 +12,42 @@ class UserAlbumScreen extends Component {
     };
   };
 
+  componentDidMount() {
+    const { onFetchAlbumPhotos, navigation } = this.props;
+    const albumId = navigation.getParam("albumId");
+    onFetchAlbumPhotos(albumId);
+  }
+
+  onPressPhoto({ photoId }) {
+    console.log(photoId);
+  }
+
   render() {
+    const { albums } = this.props;
+
     return (
-      <View>
-        <Text>Album</Text>
-      </View>
+      <PhotoGrid
+        photos={albums.photos}
+        onPress={this.onPressPhoto}
+        loading={albums.loading}
+      />
     );
   }
 }
 
-export default UserAlbumScreen;
+const mapStateToProps = state => {
+  return {
+    albums: state.albums
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onFetchAlbumPhotos: albumId => dispatch(fetchAlbumPhotos(albumId))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UserAlbumScreen);

@@ -5,7 +5,6 @@ import {
   fetchUserAlbums,
   fetchUserPosts,
   fetchUserTodos,
-  fetchAlbumPhotos
 } from "../store/actions/index";
 import { UserDetails } from "../components/UserDetails";
 import UserAlbums from "../components/UserAlbums";
@@ -39,9 +38,9 @@ class UserProfileScreen extends Component {
   }
 
   onPressAlbum = ({ album }) => {
-    const { navigation, onFetchAlbumPhotos } = this.props;
-    onFetchAlbumPhotos(album.id);
-    navigation.navigate("UserAlbum", { title: album.title });
+    const { navigation } = this.props;
+    console.log(album)
+    navigation.navigate("UserAlbum", { title: album.title, albumId: album.id });
   };
 
   onPressPost = ({ postId }) => {
