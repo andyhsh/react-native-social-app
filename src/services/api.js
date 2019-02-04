@@ -32,7 +32,7 @@ export async function getTodos(userId) {
 }
 
 export async function getAlbums(userId) {
-  const url = `${API_ENDPOINT}/posts?userId=${userId}`;
+  const url = `${API_ENDPOINT}/albums?userId=${userId}`;
   return get(url);
 }
 
