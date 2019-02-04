@@ -24,6 +24,8 @@ class UserPosts extends Component {
     );
   };
 
+  renderSeparator = () => <View style={styles.separator} />;
+
   render() {
     const { posts, loading } = this.props;
 
@@ -39,6 +41,7 @@ class UserPosts extends Component {
             data={posts}
             keyExtractor={item => `${item.id}`}
             renderItem={({ item }) => this.renderPosts({ item })}
+            ItemSeparatorComponent={this.renderSeparator}
           />
         )}
       </View>
@@ -58,8 +61,7 @@ const styles = StyleSheet.create({
   },
   noPostsDescription: {
     height: 140,
-    justifyContent: "center",
-    marginLeft: 20
+    justifyContent: "center"
   },
   postContainer: {
     marginVertical: 10
@@ -73,6 +75,11 @@ const styles = StyleSheet.create({
     marginTop: 5,
     alignSelf: "flex-end",
     color: colors.teal
+  },
+  separator: {
+    height: 1,
+    width: "100%",
+    backgroundColor: colors.lightGray
   }
 });
 

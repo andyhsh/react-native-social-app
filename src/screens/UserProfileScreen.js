@@ -1,10 +1,15 @@
 import React, { Component } from "react";
 import { View, ScrollView } from "react-native";
 import { connect } from "react-redux";
-import { fetchUserAlbums, fetchUserPosts } from "../store/actions/index";
+import {
+  fetchUserAlbums,
+  fetchUserPosts,
+  fetchUserTodos
+} from "../store/actions/index";
 import { UserDetails } from "../components/UserDetails";
 import UserAlbums from "../components/UserAlbums";
 import UserPosts from "../components/UserPosts";
+import UserTodos from "../components/UserTodos";
 
 class UserProfileScreen extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -19,9 +24,17 @@ class UserProfileScreen extends Component {
   }
 
   componentDidMount() {
-    const { onFetchUserAlbums, onFetchUserPosts } = this.props;
+    if (this.userDetails.id === 999) return;
+
+    const {
+      onFetchUserAlbums,
+      onFetchUserPosts,
+      onFetchUserTodos
+    } = this.props;
+
     onFetchUserAlbums(this.userDetails.id);
     onFetchUserPosts(this.userDetails.id);
+    onFetchUserTodos(this.userDetails.id);
   }
 
   onPressAlbum = ({ albumId }) => {
@@ -39,7 +52,7 @@ class UserProfileScreen extends Component {
   }
 
   render() {
-    const { albums, posts } = this.props;
+    const { albums, posts, todos } = this.props;
 
     return (
       <ScrollView>
@@ -61,6 +74,10 @@ class UserProfileScreen extends Component {
             onPress={this.onPressPost}
             loading={posts.loading}
           />
+          <UserTodos
+            todos={this.userDetails.id === 999 ? [] : todos.todos}
+            loading={todos.loading}
+          />
         </View>
       </ScrollView>
     );
@@ -72,14 +89,16 @@ const mapStateToProps = state => {
     user: state.users.selectedUser,
     myProfile: state.users.myProfile,
     albums: state.albums,
-    posts: state.posts
+    posts: state.posts,
+    todos: state.todos
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     onFetchUserAlbums: userId => dispatch(fetchUserAlbums(userId)),
-    onFetchUserPosts: userId => dispatch(fetchUserPosts(userId))
+    onFetchUserPosts: userId => dispatch(fetchUserPosts(userId)),
+    onFetchUserTodos: userId => dispatch(fetchUserTodos(userId))
   };
 };
 
