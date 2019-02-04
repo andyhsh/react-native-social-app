@@ -4,10 +4,12 @@ import thunk from "redux-thunk";
 
 import usersReducer from "./reducers/users";
 import albumsReducer from "./reducers/albums";
+import postsReducer from "./reducers/posts";
 
 const rootReducer = combineReducers({
   users: usersReducer,
-  albums: albumsReducer
+  albums: albumsReducer,
+  posts: postsReducer
 });
 
 const middleware = [thunk];
