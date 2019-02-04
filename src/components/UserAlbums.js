@@ -15,7 +15,7 @@ class UserAlbums extends Component {
 
     return (
       <View style={styles.albumContainer}>
-        <TouchableOpacity onPress={() => onPress({ albumId: item.id })}>
+        <TouchableOpacity onPress={() => onPress({ album: item })}>
           <View style={styles.albumThumbnail} />
           <Text style={styles.albumTitle} numberOfLines={1}>
             {item.title}

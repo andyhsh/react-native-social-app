@@ -7,6 +7,7 @@ import {
 
 import UserListScreen from "./src/screens/UserListScreen";
 import UserProfileScreen from "./src/screens/UserProfileScreen";
+import UserAlbumScreen from "./src/screens/UserAlbumScreen";
 import { colors } from "./src/styles/theme";
 
 const headerStyling = {
@@ -26,6 +27,9 @@ const FriendsStack = createStackNavigator(
     },
     UserProfile: {
       screen: UserProfileScreen
+    },
+    UserAlbum: {
+      screen: UserAlbumScreen
     }
   },
   {

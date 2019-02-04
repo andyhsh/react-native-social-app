@@ -28,7 +28,7 @@ export const fetchUserAlbums = userId => {
   };
 };
 
-export const fetchPhotos = albumId => {
+export const fetchAlbumPhotos = albumId => {
   return async dispatch => {
     dispatch({ type: FETCH_PHOTOS_REQUEST });
     try {

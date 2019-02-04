@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 import {
   fetchUserAlbums,
   fetchUserPosts,
-  fetchUserTodos
+  fetchUserTodos,
+  fetchAlbumPhotos
 } from "../store/actions/index";
 import { UserDetails } from "../components/UserDetails";
 import UserAlbums from "../components/UserAlbums";
@@ -37,8 +38,10 @@ class UserProfileScreen extends Component {
     onFetchUserTodos(this.userDetails.id);
   }
 
-  onPressAlbum = ({ albumId }) => {
-    console.log(albumId);
+  onPressAlbum = ({ album }) => {
+    const { navigation, onFetchAlbumPhotos } = this.props;
+    onFetchAlbumPhotos(album.id);
+    navigation.navigate("UserAlbum", { title: album.title });
   };
 
   onPressPost = ({ postId }) => {
@@ -98,7 +101,8 @@ const mapDispatchToProps = dispatch => {
   return {
     onFetchUserAlbums: userId => dispatch(fetchUserAlbums(userId)),
     onFetchUserPosts: userId => dispatch(fetchUserPosts(userId)),
-    onFetchUserTodos: userId => dispatch(fetchUserTodos(userId))
+    onFetchUserTodos: userId => dispatch(fetchUserTodos(userId)),
+    onFetchAlbumPhotos: albumId => dispatch(fetchAlbumPhotos(albumId))
   };
 };
 
