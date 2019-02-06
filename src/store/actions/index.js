@@ -5,5 +5,5 @@ export {
   setPhoto,
   unsetPhoto
 } from "./albums";
-export { fetchUserPosts } from "./posts";
+export { fetchUserPosts, selectPost } from "./posts";
 export { fetchUserTodos } from "./todos";

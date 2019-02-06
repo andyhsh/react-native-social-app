@@ -1,7 +1,8 @@
 import {
   FETCH_USER_POSTS_REQUEST,
   FETCH_USER_POSTS_SUCCESS,
-  FETCH_USER_POSTS_FAILURE
+  FETCH_USER_POSTS_FAILURE,
+  SET_USER_POST
 } from "./actionTypes";
 
 import { getPosts } from "../../services/api";
@@ -22,5 +23,12 @@ export const fetchUserPosts = userId => {
         error: "Something went wrong, please try again later."
       });
     }
+  };
+};
+
+export const selectPost = postId => {
+  return {
+    type: SET_USER_POST,
+    postId
   };
 };

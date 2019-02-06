@@ -5,6 +5,7 @@ import {
   fetchUserAlbums,
   fetchUserPosts,
   fetchUserTodos,
+  selectPost
 } from "../store/actions/index";
 import { UserDetails } from "../components/UserDetails";
 import UserAlbums from "../components/UserAlbums";
@@ -39,12 +40,18 @@ class UserProfileScreen extends Component {
 
   onPressAlbum = ({ album }) => {
     const { navigation } = this.props;
-    console.log(album)
     navigation.navigate("UserAlbum", { title: album.title, albumId: album.id });
   };
 
-  onPressPost = ({ postId }) => {
-    console.log(postId);
+  onPressPost = ({ post }) => {
+    const { navigation, onSelectPost } = this.props;
+
+    onSelectPost(post.id);
+
+    navigation.navigate("UserPostDetails", {
+      title: post.title,
+      postId: post.id
+    });
   };
 
   getUserObject() {
@@ -101,7 +108,8 @@ const mapDispatchToProps = dispatch => {
     onFetchUserAlbums: userId => dispatch(fetchUserAlbums(userId)),
     onFetchUserPosts: userId => dispatch(fetchUserPosts(userId)),
     onFetchUserTodos: userId => dispatch(fetchUserTodos(userId)),
-    onFetchAlbumPhotos: albumId => dispatch(fetchAlbumPhotos(albumId))
+    onFetchAlbumPhotos: albumId => dispatch(fetchAlbumPhotos(albumId)),
+    onSelectPost: postId => dispatch(selectPost(postId))
   };
 };
 
