@@ -1,43 +1,34 @@
 import {
-  FETCH_USER_POSTS_REQUEST,
-  FETCH_USER_POSTS_SUCCESS,
-  FETCH_USER_POSTS_FAILURE,
-  SET_USER_POST
+  FETCH_POST_COMMENTS_REQUEST,
+  FETCH_POST_COMMENTS_SUCCESS,
+  FETCH_POST_COMMENTS_FAILURE
 } from "../actions/actionTypes";
 
 const initialState = {
-  posts: [],
-  currentPost: null,
+  comments: [],
   error: null,
   loading: false
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_USER_POSTS_REQUEST:
+    case FETCH_POST_COMMENTS_REQUEST:
       return {
         ...state,
         loading: true,
         error: null
       };
-    case FETCH_USER_POSTS_SUCCESS:
+    case FETCH_POST_COMMENTS_SUCCESS:
       return {
         ...state,
-        posts: action.posts,
+        comments: action.comments,
         loading: false
       };
-    case FETCH_USER_POSTS_FAILURE:
+    case FETCH_POST_COMMENTS_FAILURE:
       return {
         ...state,
         loading: false,
         error: "Something went wrong, please try again later."
-      };
-    case SET_USER_POST:
-      return {
-        ...state,
-        currentPost: state.posts.find(post => {
-          return post.id === action.postId;
-        })
       };
     default:
       return state;

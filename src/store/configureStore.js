@@ -6,12 +6,14 @@ import usersReducer from "./reducers/users";
 import albumsReducer from "./reducers/albums";
 import postsReducer from "./reducers/posts";
 import todosReducer from "./reducers/todos";
+import commentsReducer from "./reducers/comments";
 
 const rootReducer = combineReducers({
   users: usersReducer,
   albums: albumsReducer,
   posts: postsReducer,
-  todos: todosReducer
+  todos: todosReducer,
+  comments: commentsReducer
 });
 
 const middleware = [thunk];
