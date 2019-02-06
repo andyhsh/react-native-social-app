@@ -9,6 +9,7 @@ import UserListScreen from "./src/screens/UserListScreen";
 import UserProfileScreen from "./src/screens/UserProfileScreen";
 import UserAlbumScreen from "./src/screens/UserAlbumScreen";
 import { colors } from "./src/styles/theme";
+import Icon from "react-native-vector-icons/MaterialIcons";
 
 const headerStyling = {
   headerStyle: {
@@ -52,8 +53,18 @@ const ProfileStack = createStackNavigator(
 
 const TabNavigator = createBottomTabNavigator(
   {
-    Friends: { screen: FriendsStack },
-    Profile: { screen: ProfileStack }
+    Friends: {
+      screen: FriendsStack,
+      navigationOptions: {
+        tabBarIcon: <Icon name="people" size={16} />
+      }
+    },
+    Profile: {
+      screen: ProfileStack,
+      navigationOptions: {
+        tabBarIcon: <Icon name="person" size={16} />
+      }
+    }
   },
   {
     tabBarOptions: {
