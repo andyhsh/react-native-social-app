@@ -3,6 +3,7 @@ import { FlatList, View, Text, StyleSheet } from "react-native";
 import PropTypes from "prop-types";
 import { colors, fontSize, fontWeight } from "../styles/theme";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import Spinner from "./Spinner";
 
 class UserTodos extends Component {
   renderTodos = ({ item }) => {
@@ -26,17 +27,19 @@ class UserTodos extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.title}>Todos</Text>
-        {!todos.length && !loading ? (
-          <View style={styles.noTodosDescription}>
-            <Text>No Todos found.</Text>
-          </View>
-        ) : (
+        <Spinner loading={loading} />
+        {!loading && (
           <FlatList
             data={todos}
             keyExtractor={item => `${item.id}`}
             renderItem={({ item }) => this.renderTodos({ item })}
             ItemSeparatorComponent={this.renderSeparator}
           />
+        )}
+        {!todos.length && !loading && (
+          <View style={styles.noTodosDescription}>
+            <Text>No Todos found.</Text>
+          </View>
         )}
       </View>
     );

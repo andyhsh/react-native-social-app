@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import PropTypes from "prop-types";
 import { colors, fontSize, fontWeight } from "../styles/theme";
+import Spinner from "./Spinner";
 
 class UserAlbums extends Component {
   renderAlbum = ({ item }) => {
@@ -31,17 +32,19 @@ class UserAlbums extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.title}>Albums</Text>
-        {!albums.length && !loading ? (
-          <View style={styles.noAlbumsDescription}>
-            <Text>No Albums found.</Text>
-          </View>
-        ) : (
+        <Spinner loading={loading} />
+        {!loading && (
           <FlatList
             horizontal={true}
             data={albums}
             keyExtractor={item => `${item.id}`}
             renderItem={({ item }) => this.renderAlbum({ item })}
           />
+        )}
+        {!albums.length && !loading && (
+          <View style={styles.noAlbumsDescription}>
+            <Text>No Albums found.</Text>
+          </View>
         )}
       </View>
     );
