@@ -4,12 +4,15 @@ import {
   FETCH_USER_ALBUMS_FAILURE,
   FETCH_PHOTOS_REQUEST,
   FETCH_PHOTOS_SUCCESS,
-  FETCH_PHOTOS_FAILURE
+  FETCH_PHOTOS_FAILURE,
+  SET_PHOTO,
+  UNSET_PHOTO
 } from "../actions/actionTypes";
 
 const initialState = {
   albums: [],
   photos: [],
+  currentPhoto: null,
   error: null,
   loading: false
 };
@@ -51,6 +54,18 @@ const reducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: "Something went wrong, please try again later."
+      };
+    case SET_PHOTO:
+      return {
+        ...state,
+        currentPhoto: state.photos.find(photo => {
+          return photo.id === action.photoId;
+        })
+      };
+    case UNSET_PHOTO:
+      return {
+        ...state,
+        currentPhoto: null
       };
     default:
       return state;

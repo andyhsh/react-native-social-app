@@ -4,7 +4,9 @@ import {
   FETCH_USER_ALBUMS_FAILURE,
   FETCH_PHOTOS_REQUEST,
   FETCH_PHOTOS_SUCCESS,
-  FETCH_PHOTOS_FAILURE
+  FETCH_PHOTOS_FAILURE,
+  SET_PHOTO,
+  UNSET_PHOTO
 } from "./actionTypes";
 
 import { getAlbums, getPhotos } from "../../services/api";
@@ -44,5 +46,18 @@ export const fetchAlbumPhotos = albumId => {
         error: "Something went wrong, please try again later."
       });
     }
+  };
+};
+
+export const setPhoto = photoId => {
+  return {
+    type: SET_PHOTO,
+    photoId
+  };
+};
+
+export const unsetPhoto = () => {
+  return {
+    type: UNSET_PHOTO
   };
 };
