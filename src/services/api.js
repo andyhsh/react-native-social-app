@@ -2,7 +2,7 @@ const API_ENDPOINT = "https://jsonplaceholder.typicode.com";
 
 async function get(url) {
   try {
-    let response = await fetch(url, {
+    const response = await fetch(url, {
       method: "GET",
       headers: { "Content-Type": "application/json; charset=UTF-8" }
     });

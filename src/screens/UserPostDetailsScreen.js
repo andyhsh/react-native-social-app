@@ -5,6 +5,10 @@ import { fetchPostComments } from "../store/actions/index";
 import Post from "../components/Post";
 import CommentsList from "../components/CommentsList";
 
+/**
+ * A screen showing a list of comments from a specific post.
+ */
+
 class UserPostDetailsScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {

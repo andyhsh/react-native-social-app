@@ -7,11 +7,15 @@ import {
   fetchUserTodos,
   selectPost
 } from "../store/actions/index";
-import { UserDetails } from "../components/UserDetails";
+import UserDetails from "../components/UserDetails";
 import UserAlbums from "../components/UserAlbums";
 import UserPosts from "../components/UserPosts";
 import UserTodos from "../components/UserTodos";
 import Spinner from "../components/Spinner";
+
+/**
+ * Screen that shows detailed data of the selected friend
+ */
 
 class FriendDetailScreen extends Component {
   static navigationOptions = ({ navigation }) => {

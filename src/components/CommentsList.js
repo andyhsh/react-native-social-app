@@ -3,27 +3,9 @@ import { FlatList, View, Text, StyleSheet } from "react-native";
 import PropTypes from "prop-types";
 import { colors, fontSize, fontWeight } from "../styles/theme";
 import Spinner from "./Spinner";
+import Comment from "./Comment";
 
 class CommentsList extends Component {
-  renderComments = ({ item }) => {
-    return (
-      <View style={styles.commentContainer}>
-        <View style={styles.commentField}>
-          <Text style={styles.commentLabel}>Name:</Text>
-          <Text>{item.name}</Text>
-        </View>
-        <View style={styles.commentField}>
-          <Text style={styles.commentLabel}>Email:</Text>
-          <Text>{item.email}</Text>
-        </View>
-        <View style={styles.commentField}>
-          <Text style={styles.commentLabel}>Comment:</Text>
-          <Text>{item.body}</Text>
-        </View>
-      </View>
-    );
-  };
-
   renderSeparator = () => <View style={styles.separator} />;
 
   render() {
@@ -37,7 +19,7 @@ class CommentsList extends Component {
           <FlatList
             data={comments}
             keyExtractor={item => `${item.id}`}
-            renderItem={({ item }) => this.renderComments({ item })}
+            renderItem={({ item }) => <Comment {...item} />}
             ItemSeparatorComponent={this.renderSeparator}
           />
         )}
@@ -65,16 +47,6 @@ const styles = StyleSheet.create({
     height: 1,
     width: "100%",
     backgroundColor: colors.lightGray
-  },
-  commentContainer: {
-    marginVertical: 10
-  },
-  commentField: {
-    marginBottom: 10
-  },
-  commentLabel: {
-    fontWeight: fontWeight.bold,
-    marginRight: 10
   }
 });
 

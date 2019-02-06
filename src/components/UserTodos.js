@@ -2,9 +2,12 @@ import React, { Component } from "react";
 import { FlatList, View, Text, StyleSheet } from "react-native";
 import PropTypes from "prop-types";
 import { colors, fontSize, fontWeight } from "../styles/theme";
-import Icon from "react-native-vector-icons/MaterialIcons";
 import Spinner from "./Spinner";
 import Todo from "../components/Todo";
+
+/**
+ * Renders a list of todos
+ */
 
 class UserTodos extends Component {
   renderSeparator = () => <View style={styles.separator} />;

@@ -2,8 +2,13 @@ import React, { Component } from "react";
 import { View, ScrollView } from "react-native";
 import { connect } from "react-redux";
 import { fetchMyProfile } from "../store/actions/index";
-import { UserDetails } from "../components/UserDetails";
+import UserDetails from "../components/UserDetails";
 import Spinner from "../components/Spinner";
+
+/**
+ * Profile screen for the logged in user. Only shows hardcoded data as editing and
+ * adding posts, albums or comments is out of the scope for this app
+ */
 
 class ProfileScreen extends Component {
   static navigationOptions = {

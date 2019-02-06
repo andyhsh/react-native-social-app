@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { View, Text, Image, StyleSheet } from "react-native";
-import { colors, fontSize, fontWeight } from "../styles/theme";
+import { View } from "react-native";
 import PhotoGrid from "../components/PhotoGrid";
 import PhotoModal from "../components/PhotoModal";
 import { fetchAlbumPhotos, setPhoto, unsetPhoto } from "../store/actions/index";
+
+/**
+ * A screen showing a grid of photos from the selected album.
+ */
 
 class UserAlbumScreen extends Component {
   static navigationOptions = ({ navigation }) => {

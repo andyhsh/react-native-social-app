@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { colors, fontSize } from "../styles/theme";
 
+/**
+ * A reusable card that renders the details of a user
+ */
+
 class UserDetails extends Component {
   render() {
     const { initials, name, email, address } = this.props;
@@ -49,4 +53,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export { UserDetails };
+export default UserDetails;

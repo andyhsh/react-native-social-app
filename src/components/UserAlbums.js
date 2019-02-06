@@ -5,6 +5,10 @@ import { fontSize, fontWeight } from "../styles/theme";
 import Spinner from "./Spinner";
 import Album from "./Album";
 
+/**
+ * Renders a horizontal list of albums
+ */
+
 class UserAlbums extends Component {
   render() {
     const { albums, loading, onPress } = this.props;

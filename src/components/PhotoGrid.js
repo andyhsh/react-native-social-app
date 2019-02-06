@@ -10,6 +10,10 @@ import PropTypes from "prop-types";
 
 const numColumns = 3;
 
+/**
+ * Renders a grid of photos
+ */
+
 class PhotoGrid extends Component {
   renderPhoto = ({ item }) => {
     const { onPress } = this.props;

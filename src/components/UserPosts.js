@@ -5,6 +5,9 @@ import { colors, fontSize, fontWeight } from "../styles/theme";
 import Post from "./Post";
 import Spinner from "./Spinner";
 
+/**
+ * Renders a list of posts
+ */
 class UserPosts extends Component {
   renderSeparator = () => <View style={styles.separator} />;
 

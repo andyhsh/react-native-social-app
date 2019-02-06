@@ -5,6 +5,10 @@ import { fetchUserList, selectUser } from "../store/actions/index";
 import { colors } from "../styles/theme";
 import UserListItem from "../components/UserListItem";
 
+/**
+ * Screen that shows a listing of the user's friends
+ */
+
 class FriendsListScreen extends Component {
   static navigationOptions = {
     title: "Friends"
