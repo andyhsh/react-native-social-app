@@ -8,6 +8,7 @@ import {
 import UserListScreen from "./src/screens/UserListScreen";
 import UserProfileScreen from "./src/screens/UserProfileScreen";
 import UserAlbumScreen from "./src/screens/UserAlbumScreen";
+import UserPostDetailsScreen from "./src/screens/UserPostDetailsScreen";
 import { colors } from "./src/styles/theme";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
@@ -31,6 +32,9 @@ const FriendsStack = createStackNavigator(
     },
     UserAlbum: {
       screen: UserAlbumScreen
+    },
+    UserPostDetails: {
+      screen: UserPostDetailsScreen
     }
   },
   {

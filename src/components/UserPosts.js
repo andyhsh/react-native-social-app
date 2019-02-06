@@ -20,7 +20,7 @@ class UserPosts extends Component {
         <Text>{item.body}</Text>
         <TouchableOpacity
           style={styles.postCommentContainer}
-          onPress={() => onPress({ postId: item.id })}
+          onPress={() => onPress({ post: item })}
         >
           <Icon style={styles.postCommentIcon} name="comment" size={14} />
           <Text style={styles.postCommentLink}>Comments</Text>

@@ -45,13 +45,8 @@ class UserProfileScreen extends Component {
 
   onPressPost = ({ post }) => {
     const { navigation, onSelectPost } = this.props;
-
     onSelectPost(post.id);
-
-    navigation.navigate("UserPostDetails", {
-      title: post.title,
-      postId: post.id
-    });
+    navigation.navigate("UserPostDetails", { title: post.title });
   };
 
   getUserObject() {
