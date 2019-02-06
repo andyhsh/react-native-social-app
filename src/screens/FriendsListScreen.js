@@ -5,7 +5,7 @@ import { fetchUserList, selectUser } from "../store/actions/index";
 import { colors } from "../styles/theme";
 import UserListItem from "../components/UserListItem";
 
-class UserListScreen extends Component {
+class FriendsListScreen extends Component {
   static navigationOptions = {
     title: "Friends"
   };
@@ -17,7 +17,7 @@ class UserListScreen extends Component {
 
   onPressUserRow = ({ user }) => {
     const { navigation, onSelectUser } = this.props;
-    navigation.navigate("UserProfile", { title: user.name });
+    navigation.navigate("FriendDetail", { title: user.name });
     onSelectUser(user);
   };
 
@@ -68,4 +68,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(UserListScreen);
+)(FriendsListScreen);

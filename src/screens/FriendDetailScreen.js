@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { View, ScrollView } from "react-native";
 import { connect } from "react-redux";
 import {
-  fetchMyProfile,
   fetchUserAlbums,
   fetchUserPosts,
   fetchUserTodos,
@@ -14,7 +13,7 @@ import UserPosts from "../components/UserPosts";
 import UserTodos from "../components/UserTodos";
 import Spinner from "../components/Spinner";
 
-class UserProfileScreen extends Component {
+class FriendDetailScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
       title: navigation.getParam("title")
@@ -104,4 +103,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(UserProfileScreen);
+)(FriendDetailScreen);

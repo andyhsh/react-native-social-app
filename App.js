@@ -6,8 +6,8 @@ import {
 } from "react-navigation";
 
 import ProfileScreen from './src/screens/ProfileScreen';
-import UserListScreen from "./src/screens/UserListScreen";
-import UserProfileScreen from "./src/screens/UserProfileScreen";
+import FriendsListScreen from "./src/screens/FriendsListScreen";
+import FriendDetailScreen from "./src/screens/FriendDetailScreen";
 import UserAlbumScreen from "./src/screens/UserAlbumScreen";
 import UserPostDetailsScreen from "./src/screens/UserPostDetailsScreen";
 import { colors } from "./src/styles/theme";
@@ -25,11 +25,11 @@ const headerStyling = {
 
 const FriendsStack = createStackNavigator(
   {
-    UserList: {
-      screen: UserListScreen
+    FriendsList: {
+      screen: FriendsListScreen
     },
-    UserProfile: {
-      screen: UserProfileScreen
+    FriendDetail: {
+      screen: FriendDetailScreen
     },
     UserAlbum: {
       screen: UserAlbumScreen
@@ -39,19 +39,19 @@ const FriendsStack = createStackNavigator(
     }
   },
   {
-    initialRouteName: "UserList",
+    initialRouteName: "FriendsList",
     defaultNavigationOptions: headerStyling
   }
 );
 
 const ProfileStack = createStackNavigator(
   {
-    MyProfile: {
+    Profile: {
       screen: ProfileScreen
     }
   },
   {
-    initialRouteName: "MyProfile",
+    initialRouteName: "Profile",
     defaultNavigationOptions: headerStyling
   }
 );
