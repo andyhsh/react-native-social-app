@@ -5,6 +5,7 @@ import {
   createAppContainer
 } from "react-navigation";
 
+import ProfileScreen from './src/screens/ProfileScreen';
 import UserListScreen from "./src/screens/UserListScreen";
 import UserProfileScreen from "./src/screens/UserProfileScreen";
 import UserAlbumScreen from "./src/screens/UserAlbumScreen";
@@ -45,12 +46,12 @@ const FriendsStack = createStackNavigator(
 
 const ProfileStack = createStackNavigator(
   {
-    UserProfile: {
-      screen: UserProfileScreen
+    MyProfile: {
+      screen: ProfileScreen
     }
   },
   {
-    initialRouteName: "UserProfile",
+    initialRouteName: "MyProfile",
     defaultNavigationOptions: headerStyling
   }
 );

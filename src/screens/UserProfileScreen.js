@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { View, ScrollView } from "react-native";
 import { connect } from "react-redux";
 import {
+  fetchMyProfile,
   fetchUserAlbums,
   fetchUserPosts,
   fetchUserTodos,
@@ -11,32 +12,31 @@ import { UserDetails } from "../components/UserDetails";
 import UserAlbums from "../components/UserAlbums";
 import UserPosts from "../components/UserPosts";
 import UserTodos from "../components/UserTodos";
+import Spinner from "../components/Spinner";
 
 class UserProfileScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      title: navigation.getParam("title", "My Profile")
+      title: navigation.getParam("title")
     };
   };
 
-  constructor(props) {
-    super(props);
-    this.userDetails = this.getUserObject();
+  componentDidMount() {
+    this.getUserData();
   }
 
-  componentDidMount() {
-    if (this.userDetails.id === 999) return;
-
+  getUserData = () => {
     const {
       onFetchUserAlbums,
       onFetchUserPosts,
-      onFetchUserTodos
+      onFetchUserTodos,
+      users
     } = this.props;
 
-    onFetchUserAlbums(this.userDetails.id);
-    onFetchUserPosts(this.userDetails.id);
-    onFetchUserTodos(this.userDetails.id);
-  }
+    onFetchUserAlbums(users.selectedUser.id);
+    onFetchUserPosts(users.selectedUser.id);
+    onFetchUserTodos(users.selectedUser.id);
+  };
 
   onPressAlbum = ({ album }) => {
     const { navigation } = this.props;
@@ -49,40 +49,34 @@ class UserProfileScreen extends Component {
     navigation.navigate("UserPostDetails", { title: post.title });
   };
 
-  getUserObject() {
-    const { user, navigation, myProfile } = this.props;
-    const isMyProfile = navigation.getParam("myProfile", true);
-    return isMyProfile ? myProfile : user;
-  }
-
   render() {
-    const { albums, posts, todos } = this.props;
+    const { albums, posts, todos, users } = this.props;
 
     return (
       <ScrollView>
-        <View>
-          <UserDetails
-            initials={this.userDetails.initials}
-            name={this.userDetails.name}
-            email={this.userDetails.email}
-            address={this.userDetails.address}
-            phone={this.userDetails.phone}
-          />
-          <UserAlbums
-            albums={this.userDetails.id === 999 ? [] : albums.albums}
-            onPress={this.onPressAlbum}
-            loading={albums.loading}
-          />
-          <UserPosts
-            posts={this.userDetails.id === 999 ? [] : posts.posts}
-            onPress={this.onPressPost}
-            loading={posts.loading}
-          />
-          <UserTodos
-            todos={this.userDetails.id === 999 ? [] : todos.todos}
-            loading={todos.loading}
-          />
-        </View>
+        <Spinner loading={users.loading} />
+        {!users.loading && users.selectedUser && (
+          <View>
+            <UserDetails
+              initials={users.selectedUser.initials}
+              name={users.selectedUser.name}
+              email={users.selectedUser.email}
+              address={users.selectedUser.address}
+              phone={users.selectedUser.phone}
+            />
+            <UserAlbums
+              albums={albums.albums}
+              onPress={this.onPressAlbum}
+              loading={albums.loading}
+            />
+            <UserPosts
+              posts={posts.posts}
+              onPress={this.onPressPost}
+              loading={posts.loading}
+            />
+            <UserTodos todos={todos.todos} loading={todos.loading} />
+          </View>
+        )}
       </ScrollView>
     );
   }
@@ -90,8 +84,7 @@ class UserProfileScreen extends Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.users.selectedUser,
-    myProfile: state.users.myProfile,
+    users: state.users,
     albums: state.albums,
     posts: state.posts,
     todos: state.todos

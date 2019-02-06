@@ -2,23 +2,13 @@ import {
   FETCH_USERS_REQUEST,
   FETCH_USERS_SUCCESS,
   FETCH_USERS_FAILURE,
-  SELECT_USER
+  SELECT_USER,
+  FETCH_MY_PROFILE
 } from "../actions/actionTypes";
-
-// Static data for simulating user's own profile
-const myProfile = {
-  id: 999,
-  initials: "AH",
-  name: "Andy Ho",
-  username: "Andyhsh",
-  email: "89andy@gmail.com",
-  address: "Apartment Street City Zip",
-  phone: "1234-5678"
-};
 
 const initialState = {
   users: [],
-  myProfile,
+  myProfile: null,
   selectedUser: null,
   error: null,
   loading: false
@@ -50,6 +40,11 @@ const reducer = (state = initialState, action) => {
         selectedUser: state.users.find(user => {
           return user.id === action.user.id;
         })
+      };
+    case FETCH_MY_PROFILE:
+      return {
+        ...state,
+        myProfile: action.myProfile
       };
     default:
       return state;

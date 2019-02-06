@@ -1,4 +1,4 @@
-export { fetchUserList, selectUser } from "./users";
+export { fetchUserList, selectUser, fetchMyProfile } from "./users";
 export {
   fetchUserAlbums,
   fetchAlbumPhotos,

@@ -11,22 +11,20 @@ class UserListScreen extends Component {
   };
 
   componentDidMount() {
-    this.props.onFetchUserList();
+    const { onFetchUserList } = this.props;
+    onFetchUserList();
   }
 
   onPressUserRow = ({ user }) => {
-    this.props.navigation.navigate("UserProfile", {
-      title: user.name,
-      myProfile: false
-    });
-    this.props.onSelectUser(user);
+    const { navigation, onSelectUser } = this.props;
+    navigation.navigate("UserProfile", { title: user.name });
+    onSelectUser(user);
   };
 
   renderSeparator = () => <View style={styles.separator} />;
 
   render() {
     const { users } = this.props;
-
 
     return (
       <View style={styles.container}>
