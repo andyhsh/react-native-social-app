@@ -1,33 +1,13 @@
 import React, { Component } from "react";
-import {
-  FlatList,
-  TouchableOpacity,
-  View,
-  Text,
-  StyleSheet
-} from "react-native";
+import { FlatList, View, Text, StyleSheet } from "react-native";
 import PropTypes from "prop-types";
-import { colors, fontSize, fontWeight } from "../styles/theme";
+import { fontSize, fontWeight } from "../styles/theme";
 import Spinner from "./Spinner";
+import Album from "./Album";
 
 class UserAlbums extends Component {
-  renderAlbum = ({ item }) => {
-    const { onPress } = this.props;
-
-    return (
-      <View style={styles.albumContainer}>
-        <TouchableOpacity onPress={() => onPress({ album: item })}>
-          <View style={styles.albumThumbnail} />
-          <Text style={styles.albumTitle} numberOfLines={1}>
-            {item.title}
-          </Text>
-        </TouchableOpacity>
-      </View>
-    );
-  };
-
   render() {
-    const { albums, loading } = this.props;
+    const { albums, loading, onPress } = this.props;
 
     return (
       <View style={styles.container}>
@@ -38,7 +18,7 @@ class UserAlbums extends Component {
             horizontal={true}
             data={albums}
             keyExtractor={item => `${item.id}`}
-            renderItem={({ item }) => this.renderAlbum({ item })}
+            renderItem={({ item }) => <Album onPress={onPress} {...item} />}
           />
         )}
         {!albums.length && !loading && (
@@ -64,19 +44,6 @@ const styles = StyleSheet.create({
     height: 140,
     justifyContent: "center",
     marginLeft: 20
-  },
-  albumContainer: {
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 20
-  },
-  albumThumbnail: {
-    width: 100,
-    height: 100,
-    backgroundColor: colors.lightGray
-  },
-  albumTitle: {
-    width: 100
   }
 });
 
