@@ -1,7 +1,9 @@
-import React, { Component } from 'react';
-import { View, Text, FlatList } from 'react-native';
+import React, { Component } from "react";
+import { ScrollView, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import { fetchPostComments } from "../store/actions/index";
+import Post from "../components/Post";
+import CommentsList from "../components/CommentsList";
 
 class UserPostDetailsScreen extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -16,15 +18,27 @@ class UserPostDetailsScreen extends Component {
   }
 
   render() {
-    const { comments } = this.props;
+    const { comments, posts } = this.props;
 
     return (
-      <View>
-        <Text>{JSON.stringify(comments.comments, null, 2)}</Text>
-      </View>
+      <ScrollView style={styles.container}>
+        <Post
+          commentsCount={comments.comments.length}
+          disabled={true}
+          {...posts.currentPost}
+        />
+        <CommentsList comments={comments.comments} loading={comments.loading} />
+      </ScrollView>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    paddingVertical: 20,
+    paddingHorizontal: 20
+  }
+})
 
 const mapStateToProps = state => {
   return {
@@ -35,7 +49,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onFetchPostComments: postId => dispatch(fetchPostComments(postId)),
+    onFetchPostComments: postId => dispatch(fetchPostComments(postId))
   };
 };
 

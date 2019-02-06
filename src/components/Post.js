@@ -11,7 +11,7 @@ class Post extends Component {
   };
 
   render() {
-    const { title, body, disabled } = this.props;
+    const { title, body, disabled, commentsCount } = this.props;
 
     return (
       <View style={styles.postContainer}>
@@ -23,7 +23,7 @@ class Post extends Component {
           disabled={disabled}
         >
           <Icon style={styles.postCommentIcon} name="comment" size={14} />
-          <Text style={styles.postCommentLink}>Comments</Text>
+          <Text style={styles.postCommentLink}>{commentsCount} Comments</Text>
         </TouchableOpacity>
       </View>
     );
@@ -58,7 +58,8 @@ Post.propTypes = {
   id: PropTypes.number,
   title: PropTypes.string,
   body: PropTypes.string,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  commentsCount: PropTypes.number
 };
 
 export default Post;
